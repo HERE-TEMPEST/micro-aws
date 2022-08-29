@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "typeRoots": ["./typings", "@types", "./node_modules/@types"],
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "*": ["@types/*"],
+      "@config": ["config/src"],
+      "@ssl": ["ssl/src"],
+      "@micro-aws-iam/exceptions": ["libs/exceptions/src"],
+      "@micro-aws-iam/intercaptors": ["libs/intercaptors/src"],
+      "@micro-aws-iam/jwt": ["libs/jwt/src"],
+      "@micro-aws-iam/db/postgres": ["libs/db/postgres/src"],
+      "@micro-aws-iam/db/mongo": ["libs/db/mongo/src"]
+    },
+    "outDir": "./dist",
+    "baseUrl": "./"
+  },
+  "include": ["typings", "application/**/*", "libs/**/*", "migrations", "db/data-source.ts", "ssl/src"],
+  "exclude": ["node_modules", "dist"]
+}

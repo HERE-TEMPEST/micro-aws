@@ -1,0 +1,81 @@
+button {
+  background: transparent;
+  border: 2px solid teal;
+  padding: 5px 10px;
+  color: teal;
+  margin-left: 5px;
+}
+
+h2 {
+  color: teal;
+  font-weight: bold;
+}
+
+.mainText {
+  text-align: center;
+  margin-top: 20px;
+  color: teal;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+* {
+  margin-top: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  background: transparent;
+  border: 2px solid teal;
+  padding: 5px 10px;
+  color: teal;
+  margin: 5px 5px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.app {
+  padding: 20px;
+}
+
+.navbar {
+  height: 50px;
+  background-color: lightgray;
+  box-shadow: 2px 2px 4px gray;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navbar__btns {
+  margin-left: auto;
+}
+
+.api {
+  display: flex;
+  flex-direction: row;
+  margin: 10% 10%;
+  justify-content: space-between;
+  justify-self: center;
+}
+
+.myImage img {
+  border: 5px solid teal;
+  height: 400px;
+  width: 400px;
+}
+
+.myImage h2 {
+  text-align: center;
+}

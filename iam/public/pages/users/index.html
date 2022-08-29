@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/users/index.css" />
+    <!-- <link rel="stylesheet" href="../../share/css/users/index.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>IAM Users</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="navbar">
+        <div @click="$router.push('/')">IAM</div>
+        <div style="margin-left: auto">
+          <input placeholder="Service name..." />
+          <button style="margin-left: 10px" @click="$router.push('/composition')">Сервисы</button>
+          <button style="margin-left: 10px" @click="$router.push('/store')">Профиль</button>
+          <button style="margin-left: 10px" @click="$router.push('/posts')">Выйти</button>
+          <button style="margin-left: 10px" @click="$router.push('/about')">O сайте</button>
+        </div>
+      </div>
+
+      <div class="root">
+        <section class="app">
+          <form class="messageForm">
+            <input type="text" placeholder="Login..." v-model="login" />
+            <input type="text" placeholder="Password..." v-model="password" />
+            <button style="margin-left: auto" @click.prevent="createUser">Create User</button>
+          </form>
+
+          <hr />
+
+          <h1 style="margin-top: 20px">Users:</h1>
+
+          <div v-if="users.length" class="user__content">
+            <div v-for="user in users" :key="user._id" class="user">
+              <div>
+                <div><strong>Login: </strong>{{ user.login }}</div>
+                <div><strong>Password: </strong> {{ user.password }}</div>
+              </div>
+              <div>
+                <button @click="event => goToUserPage(user._id)">Open</button>
+                <button style="margin-top: 5px" @click="event => deleteUser(user._id)">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <div v-else style="display: flex; justify-content: center">
+            <h1>No users....</h1>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        components: {},
+        el: '#app',
+        data: {
+          login: '',
+          password: '',
+          users: [],
+        },
+        methods: {
+          async createUser(e) {
+            try {
+              const { data } = await axios.post('https://localhost:8001/api/v1/users', {
+                login: this.login,
+                password: this.password,
+              });
+
+              await this.updateUsersList();
+            } catch (error) {
+              console.log(error);
+            }
+          },
+          async deleteUser(_id) {
+            try {
+              await axios.delete(`https://localhost:8001/api/v1/users/${_id}`);
+              await this.updateUsersList();
+            } catch (error) {
+              console.log(error);
+            }
+          },
+          async updateUsersList() {
+            try {
+              const { data } = await axios.get('https://localhost:8001/api/v1/users');
+
+              this.users = data.data.map((user) => ({ ...user, password: Array(user.password.length).fill('*').join('') }));
+            } catch (error) {
+              console.log(error);
+            }
+          },
+          async goToUserPage(_id) {
+            document.location = location.href + '/' + _id;
+          },
+        },
+        async created() {
+          await this.updateUsersList();
+        },
+      });
+    </script>
+  </body>
+</html>

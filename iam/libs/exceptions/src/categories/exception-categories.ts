@@ -1,0 +1,4 @@
+export enum IamExceptionCategories {
+  VALIDATION_ERROR = 'VALIDATION_ERROR',
+  INVALID_REQUEST = 'INVALID_REQUEST',
+}

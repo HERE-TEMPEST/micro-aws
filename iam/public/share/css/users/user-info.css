@@ -1,0 +1,65 @@
+.userInfo {
+  display: block;
+  background-color: rgba(0, 128, 128, 0.5);
+  margin: 5px 5px;
+  padding: 5px 5px;
+}
+
+* {
+  margin-top: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  height: 50px;
+  background-color: lightgray;
+  box-shadow: 2px 2px 4px gray;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navbar__btns {
+  margin-left: auto;
+}
+
+.myInput {
+  background: transparent;
+  border: 2px solid teal;
+  padding: 5px 10px;
+  color: teal;
+  margin: 5px 5px;
+}
+
+.MyText {
+  font-size: large;
+  color: black;
+}
+
+.role {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  border: 2px solid teal;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+}
+
+.role__content {
+  display: block;
+}
+
+.myButton {
+  background: transparent;
+  border: 2px solid teal;
+  padding: 5px 10px;
+  color: teal;
+}
+
+h1 {
+  color: teal;
+  font-weight: bold;
+}

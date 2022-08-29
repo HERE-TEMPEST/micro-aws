@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "../../dist/libs/exceptions/src"
+  },
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"],
+  "extends": "../../tsconfig.json",
+  "include": ["src/**/*", "../../typings/index.d.ts"]
+}

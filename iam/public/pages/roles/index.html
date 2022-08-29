@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/roles/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>IAM Roles</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="navbar">
+        <div @click="$router.push('/')">IAM</div>
+        <div style="margin-left: auto">
+          <input placeholder="Service name..." />
+          <button style="margin-left: 10px" @click="$router.push('/composition')">Сервисы</button>
+          <button style="margin-left: 10px" @click="$router.push('/store')">Профиль</button>
+          <button style="margin-left: 10px" @click="$router.push('/posts')">Выйти</button>
+          <button style="margin-left: 10px" @click="$router.push('/about')">O сайте</button>
+        </div>
+      </div>
+
+      <div class="root">
+        <section class="app">
+          <form class="messageForm">
+            <input type="text" placeholder="Service..." v-model="service" />
+            <input type="text" placeholder="Role..." v-model="role" />
+            <button style="margin-left: auto" @click.prevent="createRole">Send</button>
+          </form>
+
+          <hr />
+
+          <h1 style="margin-top: 20px">Roles:</h1>
+
+          <div v-if="roles.length" class="role__content">
+            <div v-for="role in roles" :key="role._id" class="role">
+              <div>
+                <strong>Service:</strong>
+                {{ role.service }}
+                <div><strong>Role:</strong> {{ role.role }}</div>
+              </div>
+              <div>
+                <button @click="event => goToRolePage(role._id)">Open</button>
+                <button style="margin-top: 5px" @click="event => deleteRole(role._id)">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <div v-else style="display: flex; justify-content: center">
+            <h1>No roles....</h1>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        components: {},
+        el: '#app',
+        data: {
+          service: '',
+          role: '',
+          roles: [],
+        },
+        methods: {
+          async createRole(e) {
+            try {
+              const { data } = await axios.post('https://localhost:8001/api/v1/roles', {
+                service: this.service,
+                role: this.role,
+              });
+
+              await this.updateRolesList();
+            } catch (error) {
+              console.log(error);
+            }
+          },
+          async deleteRole(_id) {
+            try {
+              await axios.delete(`https://localhost:8001/api/v1/roles/${_id}`);
+              await this.updateRolesList();
+            } catch (error) {
+              console.log(error);
+            }
+          },
+
+          async updateRolesList() {
+            try {
+              const { data } = await axios.get('https://localhost:8001/api/v1/roles');
+
+              this.roles = data.data;
+            } catch (error) {
+              console.log(error);
+            }
+          },
+          async goToRolePage(_id) {
+            document.location = location.href + '/' + _id;
+          },
+        },
+        async created() {
+          await this.updateRolesList();
+        },
+      });
+    </script>
+  </body>
+</html>

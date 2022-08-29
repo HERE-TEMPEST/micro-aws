@@ -1,0 +1,53 @@
+version: '2'
+
+services:
+  postgres:
+    container_name: main_postgres
+    image: postgres
+    ports:
+      - "8432:5432"
+    volumes:
+      - "./store:/data/postgres"
+      - ./db/postgres/pg-database.init.sql:/docker-entrypoint-initdb.d/pg-database.init.sql
+    env_file:
+      - .docker-compose.env
+    
+    # mongo:
+    #     container_name: head_mongo_storage
+    #     image: mongo:latest
+    #     ports:
+    #         - "2717:27017"
+    #     volumes:
+    #         - "./store:/data/db"
+
+  head:
+    build: ./head
+    container_name: micro_aws_head
+    links:
+      - "postgres:pg_database"
+    working_dir: "/app"
+    command: yarn run start:dev
+    expose:
+      - 8000 
+    ports:
+      - 8000:8000
+    env_file:
+      - .docker-compose.env
+    depends_on:
+      - postgres
+
+  iam:
+    build: ./iam
+    container_name: micro_aws_iam
+    links:
+      - "postgres:pg_database"
+    working_dir: "/app"
+    command: yarn run start:dev
+    expose:
+      - 8001
+    ports:
+      - 8001:8001
+    env_file:
+      - .docker-compose.env
+    depends_on:
+      - postgres

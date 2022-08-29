@@ -1,0 +1,89 @@
+.messageForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px 5px;
+}
+
+button {
+  background: transparent;
+  border: 2px solid teal;
+  padding: 5px 10px;
+  color: teal;
+}
+
+h2 {
+  color: teal;
+  font-weight: bold;
+}
+
+h1 {
+  color: teal;
+  font-weight: bold;
+}
+
+.role {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  border: 2px solid teal;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+}
+
+.role__content {
+  display: block;
+}
+
+.mainText {
+  text-align: center;
+  margin-top: 20px;
+  color: teal;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+* {
+  margin-top: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-block;
+  width: 40vmax;
+  /* justify-content: center; */
+}
+
+input {
+  background: transparent;
+  border: 2px solid teal;
+  padding: 5px 10px;
+  color: teal;
+  margin: 5px 5px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  padding: 20px;
+}
+
+.navbar {
+  height: 50px;
+  background-color: lightgray;
+  box-shadow: 2px 2px 4px gray;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navbar__btns {
+  margin-left: auto;
+}
